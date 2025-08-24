@@ -19,6 +19,7 @@
             <li><a href="donate.html">Donate</li></a>
             <li><a href="index.html#vol-sect">Volunteer</li></a>
             <li><a href="index.html#about-us">About Us</a></li>
+            <li><a href="login.html">Login</a></li>
             </ul>
     </div>
     </nav>
@@ -30,15 +31,15 @@
     </div>
     <div class="user-form">
         <h1>Start Saving Lives</h1>
-        <form>
+        <form id="registrationForm">
             <i class="fas fa-user icon"></i>
-            <input type="text" placeholder="Name">
+            <input type="text" name="name" placeholder="Name" required>
             <br>
             <i class="fas fa-envelope-square"></i>
-            <input type="email" placeholder="E-mail">
+            <input type="email" name="email" placeholder="E-mail" required>
             <br>
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" id="password_data">
+            <input type="password" name="password" placeholder="Password" id="password_data" required>
             <div class="safety" style="font-family: sans-serif; font-size: 20px;">
                 Enter Password
             </div>
