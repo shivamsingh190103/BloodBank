@@ -149,19 +149,34 @@ const startServer = async () => {
     
     if (!dbConnected) {
       console.error('❌ Failed to connect to database. Please check your MySQL configuration.');
-      process.exit(1);
+      console.log('💡 If deploying to Vercel, make sure to set up a cloud database and environment variables.');
+      
+      // In production, don't exit - allow the app to start for frontend
+      if (process.env.NODE_ENV !== 'production') {
+        process.exit(1);
+      }
     }
 
-    app.listen(PORT, () => {
-      console.log(`🚀 BloodBank server is running on port ${PORT}`);
-      console.log(`📱 Frontend: http://localhost:${PORT}`);
-      console.log(`🔗 API: http://localhost:${PORT}/api`);
-      console.log(`📚 API Docs: http://localhost:${PORT}/api`);
-    });
+    // For Vercel, we don't need to listen on a port
+    if (process.env.NODE_ENV === 'production') {
+      console.log(`🚀 BloodBank server is running on Vercel`);
+      console.log(`📱 Frontend: Available at deployment URL`);
+      console.log(`🔗 API: Available at deployment URL/api`);
+      console.log(`📚 API Docs: Available at deployment URL/api`);
+    } else {
+      app.listen(PORT, () => {
+        console.log(`🚀 BloodBank server is running on port ${PORT}`);
+        console.log(`📱 Frontend: http://localhost:${PORT}`);
+        console.log(`🔗 API: http://localhost:${PORT}/api`);
+        console.log(`📚 API Docs: http://localhost:${PORT}/api`);
+      });
+    }
 
   } catch (error) {
     console.error('❌ Failed to start server:', error);
-    process.exit(1);
+    if (process.env.NODE_ENV !== 'production') {
+      process.exit(1);
+    }
   }
 };
 

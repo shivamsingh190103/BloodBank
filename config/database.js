@@ -29,6 +29,9 @@ const testConnection = async () => {
     return true;
   } catch (error) {
     console.error('❌ Database connection failed:', error.message);
+    if (process.env.NODE_ENV === 'production') {
+      console.log('💡 Running in production without database - frontend will be available');
+    }
     return false;
   }
 };
